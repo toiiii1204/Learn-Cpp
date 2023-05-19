@@ -1,13 +1,10 @@
-
 #include "function.cpp"
 
 int main() {
     int soSinhVien = 0;
-    int luaChon = 0;
-    bool check = true;
-    while (check == true) {
+    while (true) {
         menu();
-        cin >> luaChon;
+        int luaChon = kiemTraSo();
         switch (luaChon) {
         case 1:
             system("cls");
@@ -36,17 +33,17 @@ int main() {
         case 7:
             system("cls");
             docFile(soSinhVien, sinhvien);
-            cout << "Looi";
             break;
         case 8:
             system("cls");
             ghiFile(soSinhVien, sinhvien);
             break;
         case 0:
-            check = false;
+            return 0;
             break;
+        default:
+            cout << "Vui long nhap lua chon tu 1 den 8:" << endl;
         }
         system("pause");
     }
-    return 0;
 }

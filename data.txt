@@ -1,39 +1,40 @@
-Nguyen Van A
-0233967 67CS1 3
-Dai so-2
+Nguyen Van An
+0233967 67CS1
+2
+Triet Hoc_3
 9 8 7 7.8 3 B
-Giai tich 1-2
-9 9 8 8.5 4 A
-Vat ly 1-3
-8 7 6 6.8 2.5 C+
-1.2
-Nguyen Van B
+Giai Tich 1_3
+9 9 10 9.5 4 A
+3.5
+Nguyen Duc Minh
 0233968 67CS2
-3
-Vat ly 2-3
-7 7 6 6.5 2.5 C+
-Tieng anh co ban 2-3
+2
+Dai So_3
+7 7 10 8.5 4 A
+Vat Ly 1_3
+7 7 8 7.5 3 B
+3.5
+Nguyen Anh Duc
+0233969 67IT1
+2
+Vat Ly 1_3
+7 6 8 7.2 3 B
+Giai Tich 1_3
 8 9 8 8.2 3.5 B+
-Vat ly 2-3
-9 8 7 7.8 3 B
-1
-Nguyen Van C
-0233969 67CS3
-3
-Triet hoc-3
-8 7 7 7.2 3 B
-Vat ly 2-3
-9 6 6 6.8 2.5 C+
-Phap luat dai cuong-3
-8 7 8 7.8 3 B
-0.94
-Nguyen Van E
-0233971 67CS2
-3
-Triet hoc-3
+3.2
+Nguyen Duc Anh
+0233970 67CS1
+2
+Tieng Anh Co Ban 1_3
 7 8 9 8.2 3.5 B+
-Vat ly 1-8
-7 9 5 6.5 2.5 C+
-Dai so-9
-8 7 5 6.2 2 C
-0.4
+Lap Trinh Nang Cao_3
+7 8 8 7.8 3 B
+3.2
+Nguyen Ngoc Anh
+0233971 67IT2
+2
+Triet Hoc_3
+6 8 9 8 3.5 B+
+Vat Ly 1_3
+8 9 10 9.2 4 A
+3.8

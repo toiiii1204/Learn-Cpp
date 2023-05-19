@@ -3,6 +3,7 @@
 #include <string>
 #include <iomanip>
 #include <fstream>
+#include <regex>
 
 using namespace std;
 
@@ -42,3 +43,9 @@ void xoaSinhVien(int& soSinhVien, SinhVien sinhvien[]);
 void docFile(int& soSinhVien, SinhVien sinhvien[]);
 void ghiFile(int soSinhVien, SinhVien sinhvien[]);
 void thongKe(int soSinhVien, SinhVien sinhvien[]);
+string kiemTraTen();
+string kiemTraTenMonHoc();
+int kiemTraSo();
+int kiemTraSoLuong();
+string kiemTraMaSinhVien(int soSinhVien, SinhVien sinhvien[]);
+double kiemTraDiem();
