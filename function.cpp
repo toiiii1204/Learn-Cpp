@@ -60,70 +60,51 @@ void nhapDiem(int viTriSV, int viTriMH, SinhVien sinhvien[]) {
     cout << "Nhap diem ket thuc mon: " << endl;
     sinhvien[viTriSV].monhoc[viTriMH].diemKT = kiemTraDiem();
     tinhDiem(viTriSV, viTriMH, sinhvien);
-    quyDoiDiemHe4(viTriSV, viTriMH, sinhvien);
-    quyDoiDiemChu(viTriSV, viTriMH, sinhvien);
-    GPA(viTriSV, sinhvien);
+    quyDoiDiem(viTriSV, viTriMH, sinhvien);
+    tinhGPA(viTriSV, sinhvien);
 }
 
 void tinhDiem(int viTriSV, int viTriMH, SinhVien sinhvien[]) {
+    // Điểm tổng kết = điểm quá trình / 4 + điểm kết thúc / 2.
     sinhvien[viTriSV].monhoc[viTriMH].diemTK = (sinhvien[viTriSV].monhoc[viTriMH].diemTX1 + sinhvien[viTriSV].monhoc[viTriMH].diemTX2) / 4 + sinhvien[viTriSV].monhoc[viTriMH].diemKT / 2;
 }
 
-void quyDoiDiemHe4(int viTriSV, int viTriMH, SinhVien sinhvien[]) {
+void quyDoiDiem(int viTriSV, int viTriMH, SinhVien sinhvien[]) {
     if (sinhvien[viTriSV].monhoc[viTriMH].diemTK >= 8.5 && sinhvien[viTriSV].monhoc[viTriMH].diemTK <= 10) {
         sinhvien[viTriSV].monhoc[viTriMH].diemHe4 = 4.0;
+        sinhvien[viTriSV].monhoc[viTriMH].diemChu = 'A';
     }
     else if (sinhvien[viTriSV].monhoc[viTriMH].diemTK >= 8.0 && sinhvien[viTriSV].monhoc[viTriMH].diemTK <= 8.4) {
         sinhvien[viTriSV].monhoc[viTriMH].diemHe4 = 3.5;
+        sinhvien[viTriSV].monhoc[viTriMH].diemChu = "B+";
     }
     else if (sinhvien[viTriSV].monhoc[viTriMH].diemTK >= 7.0 && sinhvien[viTriSV].monhoc[viTriMH].diemTK <= 7.9) {
         sinhvien[viTriSV].monhoc[viTriMH].diemHe4 = 3.0;
+        sinhvien[viTriSV].monhoc[viTriMH].diemChu = "B";
     }
     else if (sinhvien[viTriSV].monhoc[viTriMH].diemTK >= 6.5 && sinhvien[viTriSV].monhoc[viTriMH].diemTK <= 6.9) {
         sinhvien[viTriSV].monhoc[viTriMH].diemHe4 = 2.5;
+        sinhvien[viTriSV].monhoc[viTriMH].diemChu = "C+";
     }
     else if (sinhvien[viTriSV].monhoc[viTriMH].diemTK >= 5.5 && sinhvien[viTriSV].monhoc[viTriMH].diemTK <= 6.4) {
         sinhvien[viTriSV].monhoc[viTriMH].diemHe4 = 2.0;
+        sinhvien[viTriSV].monhoc[viTriMH].diemChu = "C";
     }
     else if (sinhvien[viTriSV].monhoc[viTriMH].diemTK >= 5.0 && sinhvien[viTriSV].monhoc[viTriMH].diemTK <= 5.4) {
         sinhvien[viTriSV].monhoc[viTriMH].diemHe4 = 1.5;
+        sinhvien[viTriSV].monhoc[viTriMH].diemChu = "D+";
     }
     else if (sinhvien[viTriSV].monhoc[viTriMH].diemTK >= 4.0 && sinhvien[viTriSV].monhoc[viTriMH].diemTK <= 4.9) {
         sinhvien[viTriSV].monhoc[viTriMH].diemHe4 = 1.0;
+        sinhvien[viTriSV].monhoc[viTriMH].diemChu = "D";
     }
     else {
         sinhvien[viTriSV].monhoc[viTriMH].diemHe4 = 0;
+        sinhvien[viTriSV].monhoc[viTriMH].diemChu = "F";
     }
 }
 
-void quyDoiDiemChu(int viTr1, int viTriMH, SinhVien sinhvien[]) {
-    if (sinhvien[viTr1].monhoc[viTriMH].diemHe4 == 4.0) {
-        sinhvien[viTr1].monhoc[viTriMH].diemChu = "A";
-    }
-    else if (sinhvien[viTr1].monhoc[viTriMH].diemHe4 == 3.5) {
-        sinhvien[viTr1].monhoc[viTriMH].diemChu = "B+";
-    }
-    else if (sinhvien[viTr1].monhoc[viTriMH].diemHe4 == 3.0) {
-        sinhvien[viTr1].monhoc[viTriMH].diemChu = "B";
-    }
-    else if (sinhvien[viTr1].monhoc[viTriMH].diemHe4 == 2.5) {
-        sinhvien[viTr1].monhoc[viTriMH].diemChu = "C+";
-    }
-    else if (sinhvien[viTr1].monhoc[viTriMH].diemHe4 == 2.0) {
-        sinhvien[viTr1].monhoc[viTriMH].diemChu = "C";
-    }
-    else if (sinhvien[viTr1].monhoc[viTriMH].diemHe4 == 1.5) {
-        sinhvien[viTr1].monhoc[viTriMH].diemChu = "D+";
-    }
-    else if (sinhvien[viTr1].monhoc[viTriMH].diemHe4 == 1.0) {
-        sinhvien[viTr1].monhoc[viTriMH].diemChu = "D";
-    }
-    else {
-        sinhvien[viTr1].monhoc[viTriMH].diemChu = "F";
-    }
-}
-
-void GPA(int viTriSV, SinhVien sinhvien[]) {
+void tinhGPA(int viTriSV, SinhVien sinhvien[]) {
     float tongDiem = 0.0;
     int tongTinChi = 0;
     for (int i = 0; i < sinhvien[viTriSV].soMonHoc; i++) {
@@ -177,8 +158,9 @@ void suaThongTin(int soSinhVien, SinhVien sinhvien[]) {
         sinhvien[viTriSV].ten = kiemTraTen();
         cout << "Nhap lop cua sinh vien: ";
         cin >> sinhvien[viTriSV].lop;
+        cin.ignore();
         for (int i = 0; i < sinhvien[viTriSV].soMonHoc; i++) {
-            cout << "Nhap diem mon " << sinhvien[viTriSV].monhoc[i].ten;
+            cout << "Nhap diem mon " << sinhvien[viTriSV].monhoc[i].ten << endl;
             nhapDiem(viTriSV, i, sinhvien);
         }
     }
@@ -203,10 +185,10 @@ void xemTimKiem(int viTriSV, SinhVien sinhvien[]) {
 
 void timKiem(int soSinhVien, SinhVien sinhvien[]) {
     string maSV;
-    string ten1;
     int viTriSV = -1;
     cout << "Nhap ma sinh vien can tim thong tin: ";
     cin >> maSV;
+    cin.ignore();
     for (int i = 0; i < soSinhVien; i++) {
         if (maSV == sinhvien[i].maSinhVien) {
             viTriSV = i;
@@ -216,16 +198,19 @@ void timKiem(int soSinhVien, SinhVien sinhvien[]) {
     if (viTriSV == -1) {
         cout << "Khong tim thay thong tin sinh vien co ma sinh vien nay!" << endl;
     }
-    xemTimKiem(viTriSV, sinhvien);
+    else {
+        xemTimKiem(viTriSV, sinhvien);
+    }
 }
 
 void xoaSinhVien(int& soSinhVien, SinhVien sinhvien[]) {
-    string mSV;
+    string maSV;
     int viTriSV = -1;
     cout << "Nhap ma sinh vien can xoa thong tin: ";
-    cin >> mSV;
+    cin >> maSV;
+    cin.ignore();
     for (int i = 0; i < soSinhVien; i++) {
-        if (mSV == sinhvien[i].maSinhVien) {
+        if (maSV == sinhvien[i].maSinhVien) {
             viTriSV = i;
             break;
         }
@@ -288,51 +273,47 @@ void ghiFile(int soSinhVien, SinhVien sinhvien[]) {
     fileOut.close();
 }
 void thongKe(int soSinhVien, SinhVien sinhvien[]) {
-    float maxGPA = sinhvien[0].GPA;
-    int max1;
-    float max2GPA = sinhvien[0].GPA;
-    int max2;
-    float max3GPA = sinhvien[0].GPA;
-    int max3;
+    double soSV = double(soSinhVien);
+    float sumGPA = 0; // Tổng GPA của toàn bộ sinh viên.
+    double count1 = 0; // Đếm số lượng sinh viên học lực xuất sắc.
+    double count2 = 0; // Đếm số lượng sinh viên học lực giỏi.
+    double count3 = 0; // Đếm số lượng sinh viên học lực khá.
+    double count4 = 0; // Đếm số lượng sinh viên học lực trung bình.
+    double count5 = 0; // Đếm số lượng sinh viên học lực yếu.
+    double count6 = 0; // Đếm số lượng sinh viên học lực kém.
     for (int i = 0; i < soSinhVien; i++) {
-        if (sinhvien[i].GPA > maxGPA) {
-            maxGPA = sinhvien[i].GPA;
-            max1 = i;
+        sumGPA += sinhvien[i].GPA;
+        if (sinhvien[i].GPA >= 3.6 && sinhvien[i].GPA <= 4.0) {
+            count1++;
+        }
+        else if (sinhvien[i].GPA >= 3.2 && sinhvien[i].GPA < 3.6) {
+            count2++;
+        }
+        else if (sinhvien[i].GPA >= 2.5 && sinhvien[i].GPA < 3.2) {
+            count3++;
+        }else if (sinhvien[i].GPA >= 2.0 && sinhvien[i].GPA < 2.5) {
+            count4++;
+        }else if (sinhvien[i].GPA >= 1.0 && sinhvien[i].GPA < 2.0) {
+            count5++;
+        }else if (sinhvien[i].GPA < 1.0) {
+            count6++;
         }
     }
-    for (int i = 0; i < soSinhVien; i++) {
-        if (sinhvien[i].GPA > max2GPA && sinhvien[i].GPA < maxGPA) {
-            max2GPA = sinhvien[i].GPA;
-            max2 = i;
+    double tiLe1 = count1 / soSV * 100; // Tỉ lệ sinh viên có học lực xuất sắc.
+    double tiLe2 = count2 / soSV * 100; // Tỉ lệ sinh viên có học lực giỏi
+    double tiLe3 = count3 / soSV * 100; // Tỉ lệ sinh viên có học lực khá.
+    double tiLe4 = count4 / soSV * 100; // Tỉ lệ sinh viên có học lực trung bình.
+    double tiLe5 = count5 / soSV * 100; // Tỉ lệ sinh viên có học lực yếu.
+    double tiLe6 = count6 / soSV * 100; // Tỉ lệ sinh viên có học lực kém.
+    cout << "Co " << soSinhVien << " trong danh sach." << endl;
+    cout << "GPA trung binh cua danh sach: " << (sumGPA / soSinhVien) << endl;
+    cout << "Ti le sinh vien co hoc luc xuat sac: " << setprecision(4) << tiLe1 << "%" << endl;
+    cout << "Ti le sinh vien co hoc luc gioi: " << setprecision(4) << tiLe2 << "%" << endl;
+    cout << "Ti le sinh vien co hoc luc kha: " << setprecision(4) << tiLe3 << "%" << endl;
+    cout << "Ti le sinh vien co hoc luc trung binh: " << setprecision(4) << tiLe4 << "%" << endl;
+    cout << "Ti le sinh vien co hoc luc yeu: " << setprecision(4) << tiLe5 << "%" << endl;
+    cout << "Ti le sinh vien co hoc luc kem: " << setprecision(4) << tiLe6 << "%" << endl;
 
-        }
-    }
-    for (int i = 0; i < soSinhVien; i++) {
-        if (sinhvien[i].GPA > max3GPA && sinhvien[i].GPA < maxGPA && sinhvien[i].GPA < max2GPA) {
-            max3GPA = sinhvien[i].GPA;
-            max3 = i;
-        }
-    }
-
-    cout << "------------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
-    for (int i = 0; i < soSinhVien; i++) {
-        if (maxGPA == sinhvien[i].GPA) {
-            cout << "Sinh vien co GPA cao nhat: " << sinhvien[i].ten << endl;
-            cout << "GPA: " << setprecision(2) << maxGPA << endl;
-        }
-    }
-    for (int i = 0; i < soSinhVien; i++) {
-        if (max2GPA == sinhvien[i].GPA && sinhvien[i].ten != sinhvien[max1].ten ) {
-            cout << "Sinh vien co GPA cao thu hai: " << sinhvien[i].ten << endl;
-            cout << "GPA: " << setprecision(2) << max2GPA << endl;
-        }
-    }
-    for (int i = 0; i < soSinhVien; i++) {
-        if (max3GPA == sinhvien[i].GPA && sinhvien[i].ten != sinhvien[max2].ten) {
-            cout << "Sinh vien co GPA cao thu 3: " << sinhvien[i].ten << endl;
-            cout << "GPA: " << setprecision(2) << max3GPA << endl;
-        }
-    }
 }
 
 string kiemTraTen() {
@@ -362,7 +343,7 @@ string kiemTraTenMonHoc() {
 int kiemTraSo() {
     while (true) {
         bool check = 1;
-        int temp;
+        int max = 2000000; // Chương trình nhận số đầu vào tối đa bằng 2 triệu;
         string str;
         getline(cin, str);
         for (int i = 0; i < str.length(); i++) {
@@ -372,15 +353,14 @@ int kiemTraSo() {
             }
         }
         if (check == 1) {
-            temp = stoi(str);
-            if (temp > 2000000000) {
+            if (stoi(str) > max) {
                  cout << "Gia tri qua lon! Vui long nhap lai:" << endl;
             }
-            else if (temp < 0) {
+            else if (stoi(str) < 0) {
                 cout << "Nhap gia tri sai! Vui long nhap lai:" << endl;
             }
             else {
-                return temp;
+                return stoi(str);
             }           
         }
         else {
@@ -397,7 +377,9 @@ int kiemTraSoLuong() {
         if (temp == 0) {
             cout << "So luong phai lon hon 0! Vui long nhap lai: ";
         }
-        else return temp;
+        else {
+            return temp;
+        }
     }
     
 }
@@ -438,7 +420,9 @@ double kiemTraDiem() {
         if (temp < 0 || temp > 10) {
             cout << "Gia tri ngoai khoang cho phep! Vui long nhap lai: ";
         }
-        else return temp;  
+        else {
+            return temp;
+        }  
     }
 
 }
