@@ -20,7 +20,7 @@ int main() {
             break;
         case 4:
             system("cls");
-            timKiem(soSinhVien, sinhvien);
+            xemTimKiem(soSinhVien, sinhvien);
             break;
         case 5:
             system("cls");

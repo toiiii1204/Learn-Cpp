@@ -30,6 +30,7 @@ void nhapSinhVien(int &soSinhVien, SinhVien sinhvien[]) {
         sinhvien[i].maSinhVien = kiemTraMaSinhVien(soSinhVien, sinhvien);
         cout << "Nhap ten lop cua sinh vien: ";
         cin >> sinhvien[i].lop;
+        sinhvien[i].lop = xoaKhoangTrang(sinhvien[i].lop);
         cin.ignore();
         cout << "Nhap so luong mon hoc: ";
         sinhvien[i].soMonHoc = kiemTraSoLuong();
@@ -66,7 +67,7 @@ void nhapDiem(int viTriSV, int viTriMH, SinhVien sinhvien[]) {
 
 void tinhDiem(int viTriSV, int viTriMH, SinhVien sinhvien[]) {
     // Điểm tổng kết = điểm quá trình / 4 + điểm kết thúc / 2.
-    sinhvien[viTriSV].monhoc[viTriMH].diemTK = (sinhvien[viTriSV].monhoc[viTriMH].diemTX1 + sinhvien[viTriSV].monhoc[viTriMH].diemTX2) / 4 + sinhvien[viTriSV].monhoc[viTriMH].diemKT / 2;
+    sinhvien[viTriSV].monhoc[viTriMH].diemTK = (sinhvien[viTriSV].monhoc[viTriMH].diemTX1 + sinhvien[viTriSV].monhoc[viTriMH].diemTX2) / 4.0 + sinhvien[viTriSV].monhoc[viTriMH].diemKT / 2.0;
 }
 
 void quyDoiDiem(int viTriSV, int viTriMH, SinhVien sinhvien[]) {
@@ -116,40 +117,18 @@ void tinhGPA(int viTriSV, SinhVien sinhvien[]) {
 
 void xemDanhSach(int soSinhVien, SinhVien sinhvien[]) {
     if (sinhvien[0].ten.empty() && sinhvien[0].maSinhVien.empty() && sinhvien[0].lop.empty()) {
-        cout << "Danh sach trong." << endl;
+        cout << "Danh sach trong!" << endl;
     }
     else {
         for (int i = 0; i < soSinhVien; i++) {
-            cout << "------------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
-            cout << "\tMa sinh vien: " << sinhvien[i].maSinhVien << endl;
-            cout << "\tHo ten: " << sinhvien[i].ten << endl;
-            cout << "\tLop: " << sinhvien[i].lop << endl;
-            for (int j = 0; j < sinhvien[i].soMonHoc; j++) {
-                cout << "\n\tDiem mon " << sinhvien[i].monhoc[j].ten << endl;
-                cout << "\tDiem thuong xuyen 1: " << sinhvien[i].monhoc[j].diemTX1 << endl;
-                cout << "\tDiem thuong xuyen 2: " << sinhvien[i].monhoc[j].diemTX2 << endl;
-                cout << "\tDiem thi ket thuc mon: " << sinhvien[i].monhoc[j].diemKT << endl;
-                cout << "\tDiem tong ket: " << setprecision(2) << sinhvien[i].monhoc[j].diemTK << endl;
-                cout << "\tDiem he 4: " << sinhvien[i].monhoc[j].diemHe4 << endl;
-                cout << "\tDiem chu: " << sinhvien[i].monhoc[j].diemChu << endl;
-            }
-            cout << "\tGPA: " << setprecision(2) << sinhvien[i].GPA << endl;
+            xemSinhVien(i, sinhvien);
         }
     }
 }
 
 void suaThongTin(int soSinhVien, SinhVien sinhvien[]) {
-    string maSV;
-    int viTriSV = -1;
     cout << "Nhap ma sinh vien can sua thong tin: ";
-    cin >> maSV;
-    cin.ignore();
-    for (int i = 0; i < soSinhVien; i++) {
-        if (maSV == sinhvien[i].maSinhVien) {
-            viTriSV = i;
-            break;
-        }
-    }
+    int viTriSV = timKiem(soSinhVien, sinhvien);
     if (viTriSV == -1) {
         cout << "Khong tim thay thong tin sinh vien co ma sinh vien nay!" << endl;
     }
@@ -157,16 +136,18 @@ void suaThongTin(int soSinhVien, SinhVien sinhvien[]) {
         cout << "Nhap ten sinh vien moi: ";
         sinhvien[viTriSV].ten = kiemTraTen();
         cout << "Nhap lop cua sinh vien: ";
+        
         cin >> sinhvien[viTriSV].lop;
+        sinhvien[viTriSV].lop = xoaKhoangTrang(sinhvien[viTriSV].lop);
         cin.ignore();
-        for (int i = 0; i < sinhvien[viTriSV].soMonHoc; i++) {
-            cout << "Nhap diem mon " << sinhvien[viTriSV].monhoc[i].ten << endl;
-            nhapDiem(viTriSV, i, sinhvien);
-        }
+        cout << "Nhap so luong mon hoc: ";
+        sinhvien[viTriSV].soMonHoc = kiemTraSoLuong();
+        nhapMonHoc(viTriSV, sinhvien);
+        cout << "Sua thong tin thanh cong!" << endl;
     }
 }
 
-void xemTimKiem(int viTriSV, SinhVien sinhvien[]) {
+void xemSinhVien(int viTriSV, SinhVien sinhvien[]) {
     cout << "------------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
     cout << "\tMa sinh vien: " << sinhvien[viTriSV].maSinhVien << endl;
     cout << "\tHo ten: " << sinhvien[viTriSV].ten << endl;
@@ -183,10 +164,9 @@ void xemTimKiem(int viTriSV, SinhVien sinhvien[]) {
     cout << "\tGPA: " << setprecision(2) << sinhvien[viTriSV].GPA << endl;
 }
 
-void timKiem(int soSinhVien, SinhVien sinhvien[]) {
+int timKiem(int soSinhVien, SinhVien sinhvien[]) {
     string maSV;
     int viTriSV = -1;
-    cout << "Nhap ma sinh vien can tim thong tin: ";
     cin >> maSV;
     cin.ignore();
     for (int i = 0; i < soSinhVien; i++) {
@@ -195,34 +175,33 @@ void timKiem(int soSinhVien, SinhVien sinhvien[]) {
             break;
         }
     }
+    return viTriSV;
+}
+
+void xemTimKiem(int soSinhVien, SinhVien sinhvien[]) {
+    cout << "Nhap ma sinh vien can tim thong tin: ";
+    int viTriSV = timKiem(soSinhVien, sinhvien);
     if (viTriSV == -1) {
         cout << "Khong tim thay thong tin sinh vien co ma sinh vien nay!" << endl;
     }
     else {
-        xemTimKiem(viTriSV, sinhvien);
+        xemSinhVien(viTriSV, sinhvien);
     }
 }
 
 void xoaSinhVien(int& soSinhVien, SinhVien sinhvien[]) {
-    string maSV;
-    int viTriSV = -1;
     cout << "Nhap ma sinh vien can xoa thong tin: ";
-    cin >> maSV;
-    cin.ignore();
-    for (int i = 0; i < soSinhVien; i++) {
-        if (maSV == sinhvien[i].maSinhVien) {
-            viTriSV = i;
-            break;
-        }
-    }
+    int viTriSV = timKiem(soSinhVien, sinhvien);
     if (viTriSV == -1) {
         cout << "Khong tim thay thong tin sinh vien co ma sinh vien nay!" << endl;
     }
-    for (int i = viTriSV; i < soSinhVien - 1; i++) {
-        sinhvien[i] = sinhvien[i + 1];
+    else {
+        for (int i = viTriSV; i < soSinhVien - 1; i++) {
+            sinhvien[i] = sinhvien[i + 1];
+        }
+        soSinhVien--;
+        cout << "Xoa thong tin sinh vien thanh cong!" << endl;
     }
-    soSinhVien--;
-    cout << "Xoa thong tin sinh vien thanh cong!" << endl;
 }
 
 void docFile(int &soSinhVien, SinhVien sinhvien[]) {
@@ -299,6 +278,7 @@ void thongKe(int soSinhVien, SinhVien sinhvien[]) {
             count6++;
         }
     }
+    double GPATB = sumGPA / soSinhVien;
     double tiLe1 = count1 / soSV * 100; // Tỉ lệ sinh viên có học lực xuất sắc.
     double tiLe2 = count2 / soSV * 100; // Tỉ lệ sinh viên có học lực giỏi
     double tiLe3 = count3 / soSV * 100; // Tỉ lệ sinh viên có học lực khá.
@@ -306,46 +286,111 @@ void thongKe(int soSinhVien, SinhVien sinhvien[]) {
     double tiLe5 = count5 / soSV * 100; // Tỉ lệ sinh viên có học lực yếu.
     double tiLe6 = count6 / soSV * 100; // Tỉ lệ sinh viên có học lực kém.
     cout << "Co " << soSinhVien << " trong danh sach." << endl;
-    cout << "GPA trung binh cua danh sach: " << (sumGPA / soSinhVien) << endl;
-    cout << "Ti le sinh vien co hoc luc xuat sac: " << setprecision(4) << tiLe1 << "%" << endl;
-    cout << "Ti le sinh vien co hoc luc gioi: " << setprecision(4) << tiLe2 << "%" << endl;
-    cout << "Ti le sinh vien co hoc luc kha: " << setprecision(4) << tiLe3 << "%" << endl;
-    cout << "Ti le sinh vien co hoc luc trung binh: " << setprecision(4) << tiLe4 << "%" << endl;
-    cout << "Ti le sinh vien co hoc luc yeu: " << setprecision(4) << tiLe5 << "%" << endl;
-    cout << "Ti le sinh vien co hoc luc kem: " << setprecision(4) << tiLe6 << "%" << endl;
+    cout << "GPA trung binh cua danh sach: " << setprecision(2)<< GPATB << endl;
+    cout << "Ti le sinh vien co hoc luc xuat sac: " << setprecision(3) << tiLe1 << "%" << endl;
+    cout << "Ti le sinh vien co hoc luc gioi: " << setprecision(3) << tiLe2 << "%" << endl;
+    cout << "Ti le sinh vien co hoc luc kha: " << setprecision(3) << tiLe3 << "%" << endl;
+    cout << "Ti le sinh vien co hoc luc trung binh: " << setprecision(3) << tiLe4 << "%" << endl;
+    cout << "Ti le sinh vien co hoc luc yeu: " << setprecision(3) << tiLe5 << "%" << endl;
+    cout << "Ti le sinh vien co hoc luc kem: " << setprecision(3) << tiLe6 << "%" << endl;
 
 }
 
+int kiemTraKyTu(string str) {
+    bool check1 = false; // Biến check1 lưu trữ giá trị kiểm tra sô trong chuỗi str.
+    bool check2 = false; // Biến check1 lưu trữ giá trị kiểm tra ký tự đặc biệt trong chuỗi str.
+    for (char c : str) {
+        if (isdigit(c)) {
+            check1 = true;
+        }
+        else if (!isalpha(c) && !isspace(c)) {
+            check2 = true;
+        }
+    }
+    if (check1 && check2) {
+        return 2;
+    }
+    else if (check1) {
+        return 0;
+    }
+    else if (check2) {
+        return -1;
+    }
+    return 1;
+}
+
+string xoaKhoangTrang(string &str) {
+    while (str[0] == ' ') {
+        str.erase(0,1);
+    }
+    while (str[str.length() - 1] == ' ') {
+        str.pop_back();
+    }
+    int i = 0;
+    while (i < str.length()) {
+        if (str[i] == ' ' && str[i+1] == ' ') {
+            str.erase(i, 1);
+        }
+        else {
+            i++;
+        }
+    }
+    return str;
+}
+
+string inHoa(string &str) {
+    str = xoaKhoangTrang(str);
+    if (str[0] >= 'a' && str[0] <= 'z') {
+        str[0] -= 32;
+    }
+    for (int i = 0; i < str.length(); i++) {
+        if (str[i] == ' ' && str[i + 1] >= 'a' && str[i+1] <= 'z') {
+            str[i+1] -= 32;
+        }
+    }
+    return str;
+}
+
 string kiemTraTen() {
-    regex rg("([A-Z][a-z]+( |$))+");
     string str;
     while (true) {
         getline(cin, str);
-        if (regex_match(str, rg)) {
+        if (kiemTraKyTu(str) == 0) {
+            cout << "Ten khong duoc chua ky tu so! Vui long nhap lai: ";
+        }
+        else if (kiemTraKyTu(str) == -1) {
+            cout << "Ten khong duoc chua ky dac biet! Vui long nhap lai: ";
+        }
+        else if (kiemTraKyTu(str) == 2) {
+            cout << "Ten khong duoc chua ky so va ky tu dac biet! Vui long nhap lai: ";
+        } 
+        else {
+            str = inHoa(str);
             return str;
         }
-        cout << "Nhap ten sai! Vui long nhap lai: ";
     }
 }
 
 string kiemTraTenMonHoc() {
-   regex rg("([A-Z][a-zA-Z ]+([1-9]|$))");
     string str;
     while (true) {
         getline(cin, str);
-        if (regex_match(str, rg)) {
-            return str;
+        if (kiemTraKyTu(str) == -1) {
+            cout << "Ten mon hoc khong duoc chua ky tu dac biet! Vui long nhap lai: ";
         }
-        cout << "Nhap ten sai! Vui long nhap lai: ";
+        else {
+            return inHoa(str);
+        }
     }
 }
 
 int kiemTraSo() {
     while (true) {
         bool check = 1;
-        int max = 2000000; // Chương trình nhận số đầu vào tối đa bằng 2 triệu;
+        int max = 2000000; // Chương trình nhận đầu vào là số nguyên tối đa bằng 2 triệu;
         string str;
         getline(cin, str);
+        str = xoaKhoangTrang(str);
         for (int i = 0; i < str.length(); i++) {
             if (!isdigit(str[i])) {
                 check = 0;
@@ -414,15 +459,31 @@ string kiemTraMaSinhVien(int soSinhVien, SinhVien sinhvien[]) {
 
 
 double kiemTraDiem() {
-    double temp;
     while (true) {
-        temp = kiemTraSo();
-        if (temp < 0 || temp > 10) {
-            cout << "Gia tri ngoai khoang cho phep! Vui long nhap lai: ";
+        bool check = 1;
+        string str;
+        getline(cin, str);
+        str = xoaKhoangTrang(str);
+        for (int i = 0; i < str.length(); i++) {
+            if (isdigit(str[i]) || str[i] == '.') {
+                continue;
+            }
+            else {
+                check = 0;
+                break;
+            }
+        }
+        if (check == 1) {
+            if (stod(str) < 0 || stod(str) > 10) {
+                check = 0;
+            }     
+            else {
+                return stod(str);
+            }     
         }
         else {
-            return temp;
-        }  
+            cout << "Nhap gia tri sai! Vui long nhap lai: " << endl;
+        }
+        
     }
-
 }
